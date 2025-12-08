@@ -31,18 +31,9 @@
                         <div class="hidden md:block">
                             <div class="ml-10 flex items-baseline space-x-4">
                                 <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-white/5 hover:text-white" -->
-                                @php
-                                    $current = 'bg-gray-900 text-white';
-                                    $default = 'text-gray-300 hover:bg-white/5 hover:text-white';
-
-                                @endphp
-                                <a href="/job" aria-current="page"
-                                    class="rounded-md px-3 py-2 text-sm font-medium {{ request()->is('job') ? $current : $default }}">Dashboard</a>
-                                <a href="/about"
-                                    class="rounded-md px-3 py-2 text-sm font-medium {{ request()->is('about') ? $current : $default }}">About</a>
-                                <a href="/contact"
-                                    class="rounded-md px-3 py-2 text-sm font-medium {{ request()->is('contact') ? $current : $default }}">Contact
-                                    Us</a>
+                                <x-nav-link href="/" id="abd" :active="request()->is('/')">Dashboard</x-nav-link>
+                                <x-nav-link href="/about" :active="request()->is('about')">About</x-nav-link>
+                                <x-nav-link href="/contact" :active="request()->is('contact')">Contact Us</x-nav-link>
                             </div>
                         </div>
                     </div>
