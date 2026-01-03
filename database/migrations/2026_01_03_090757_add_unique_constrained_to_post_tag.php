@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('posts', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->string('title');
-            $table->text('body');
-            $table->boolean('published')->default(false);
-            $table->string('author')->after('title');
-            $table->timestamps();
+        Schema::table('post_tag', function (Blueprint $table) {
+            $table->unique(['post_id', 'tag_id']);
         });
     }
 
@@ -26,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('posts');
+        Schema::table('post_tag', function (Blueprint $table) {
+            $table->dropUnique(['post_id', 'tag_id']);
+        });
     }
 };

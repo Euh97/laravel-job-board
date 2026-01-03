@@ -11,8 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('post', function (Blueprint $table) {
-            $table->string('author')->after('title');
+        Schema::create('tags', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->string('title');
+            $table->timestamps();
         });
     }
 
@@ -21,8 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('post', function (Blueprint $table) {
-            $table->dropColumn('author');
-        });
+        Schema::dropIfExists('tags');
     }
 };
