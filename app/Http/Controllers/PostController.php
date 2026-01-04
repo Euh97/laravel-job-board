@@ -33,8 +33,14 @@ class PostController extends Controller
         //     'published' => true
         // ]);
 
-            Post::factory(100)->create();
+            Post::factory(1)->create();
 
-        return redirect('/blog');
+        return response("Succesfully created",201);
+    }
+
+    function delete($id)
+    {
+        Post::destroy($id);
+        return response("Succesfully deleted",204);
     }
 }

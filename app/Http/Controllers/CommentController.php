@@ -24,8 +24,9 @@ class CommentController extends Controller
         //     'post_id' => 1,
         // ]);
 
-        Comment::factory(20)->create();
+        Comment::factory(2)->create();
 
-        return redirect('/comments');
+        return response(['message'=> "success",
+            'data' => '5'],201);
     }
 }
