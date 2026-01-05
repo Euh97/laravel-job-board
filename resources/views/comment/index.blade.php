@@ -8,4 +8,6 @@
     @empty
         <p>No comments available.</p>
     @endforelse
+
+    {{ $comments->links() }}
 </x-layout>
