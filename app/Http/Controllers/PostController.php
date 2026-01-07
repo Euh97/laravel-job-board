@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\BlogPostRequest;
 use App\Models\Post;
 
 class PostController extends Controller
@@ -12,7 +13,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $data = Post::paginate(10); //or simple pagination
+        $data = Post::latest()->paginate(10); //or simple pagination
 
         // Pass the data to the view (not shown here)
         return view('post.index', ['posts' => $data]);
@@ -29,8 +30,31 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
+    public function store(BlogPostRequest $request)
+    {   
+        // Validate 
+        // $validated = $request->validate([
+        //     'title' => 'required' ,
+        //     'body' => 'required' ,
+        //     'author' => 'required' ,
+        // ],[
+        //     'title.required' => 'Field is required',
+        //     'body.required' => 'Field is required',
+        //     'author.required' => 'Field is required',
+        // ]);
+
+        $post = new Post();
+        $post->title = $request->input('title');
+        $post->author = $request->input('author');
+        $post->body = $request->input('body');
+        $post->published = $request->has('published');
+
+        $post->save();
+        return redirect('blog')->with('success', 'Post created successfully');
+
+
+
+        // print_r($request->all());
         // @TODO: This will be completed later in the forms section 
     }
 
