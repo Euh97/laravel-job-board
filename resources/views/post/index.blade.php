@@ -9,9 +9,20 @@
     </div>
 
     @forelse ($posts as $post)
-        <div class="mb-4 p-4 border rounded-lg shadow-sm">
-            <h2 class="text-2xl font-semibold mb-2">{{ $post->title }}</h2>
-            <p class="text-gray-700">{{ $post->body }}</p>
+        <div class="mb-4 px-4 py-6 border rounded-lg shadow-sm flex justify-between items-center">
+            <div>
+                <h2 class="text-2xl font-semibold mb-2">{{ $post->title }}</h2>
+                <p class="text-gray-700">{{ $post->author }}</p>
+            </div>
+            <div>
+                <a href="/blog/{{ $post->id }}/edit"
+                    class="text-yellow-600 hover:text-indigo-500">Edit</a>
+                <form action="/blog/{{ $post->id }}" method="POST" class="inline" onsubmit="return confirm('Are you sure ?')">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="text-red-600 hover:text-red-800 ml-2">Delete</button>
+                </form>
+            </div>
         </div>
     @empty
         <p>No blog posts available.</p>
