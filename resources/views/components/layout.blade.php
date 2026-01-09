@@ -38,6 +38,22 @@
                             </div>
                         </div>
                     </div>
+                    <div class="hidden md:block">
+                        <div class="ml-4 flex items-baseline md:ml-6">
+                            @guest
+                                <x-nav-link href="/signup" :active="request()->is('signup')">signup</x-nav-link>
+                                <x-nav-link href="/login" :active="request()->is('login')">login</x-nav-link>
+                            @endguest
+                            @auth
+                                <span class="text-white mr-4">{{ Auth::user()->name }}</span>
+                                <form action="/logout" method="POST">
+                                    @csrf
+                                    <button type="submit"
+                                        class="bg-gray-800 text-gray-400 hover:text-white">Logout</button>
+                                </form>
+                            @endauth
+                        </div>
+                    </div>
                 </div>
             </div>
         </nav>
