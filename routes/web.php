@@ -22,8 +22,31 @@ Route::post('/login',[AuthController::class,'login']);
 
 // ## Protected Routes
 Route::middleware('auth')->group(function(){
-    Route::resource('blog', PostController::class);
-    Route::resource('comments', CommentController::class);
+
+    // Admin
+    Route::middleware('role:admin')->group(function(){
+        Route::delete('/blog/{post}', [PostController::class, 'destroy'])->name('blog.destroy');
+    });
+        
+    // Editor, Admin
+    Route::middleware('role:editor,admin')->group(function(){
+        Route::get('/blog/create', [PostController::class, 'create'])->name('blog.create');
+        Route::post('/blog', [PostController::class, 'store'])->name('blog.store');
+
+        Route::middleware('can:update,post')->group(function(){ // can bde 23ml update w t7a2a2 3l post 
+            Route::get('/blog/{post}/edit', [PostController::class, 'edit'])->name('blog.edit');
+            Route::patch('/blog/{post}', [PostController::class, 'update'])->name('blog.update');
+        });
+            // Route::get('/blog/{post}/edit', [PostController::class, 'edit'])->name('blog.edit')->can('update', 'post');
+    });
+    
+    // Viewer, Editor, Admin
+    Route::middleware('role:viewer,editor,admin')->group(function(){
+        Route::get('/blog', [PostController::class, 'index'])->name('blog.index');
+        Route::get('/blog/{post}', [PostController::class, 'show'])->name('blog.show');
+        Route::resource('comments', CommentController::class);
+    });
+    
     Route::resource('tags', TagController::class);
     Route::post('/logout',[AuthController::class,'logout'])->name('logout');
 });

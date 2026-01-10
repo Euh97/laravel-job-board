@@ -15,9 +15,8 @@ class BlogPostRequest extends FormRequest
     {
         return [
             'title' => "bail|required|unique:posts,title,{$this->input('id')}" ,
-            'body' => 'required' ,
-            'author' => 'required' ,
-        ];
+            'body' => 'required'
+    ];
     }
 
     public function messages()
@@ -25,8 +24,7 @@ class BlogPostRequest extends FormRequest
         return [
             'title.required' => 'Field is required',
             'title.unique' => 'Field is taken already',
-            'body.required' => 'Field is required',
-            'author.required' => 'Field is required',
+            'body.required' => 'Field is required'
         ];
     }
 }

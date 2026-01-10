@@ -17,7 +17,7 @@
                 @endif --}}
 
                 <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                    <div class="sm:col-span-3">
+                    <div class="col-span-full">
                         <label for="title" class="block text-sm/6 font-medium text-gray-900">Title</label>
                         <div class="mt-2">
                             <input id="title" type="text" name="title" value="{{ old('title') }}"
@@ -29,7 +29,7 @@
                         @enderror
                     </div>
 
-                    <div class="sm:col-span-3">
+                    {{-- <div class="sm:col-span-3">
                         <label for="author" class="block text-sm/6 font-medium text-gray-900">Author</label>
                         <div class="mt-2">
                             <input id="author" type="text" name="author" value="{{ old('author') }}"
@@ -39,7 +39,7 @@
                         @error('author')
                             <div class="text-red-500">{{ $message }}</div>
                         @enderror
-                    </div>
+                    </div> --}}
 
                     <div class="col-span-full">
                         <label for="body" class="block text-sm/6 font-medium text-gray-900">Content</label>

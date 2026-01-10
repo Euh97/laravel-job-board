@@ -8,10 +8,10 @@
         <div class="space-y-12">
             <div class="border-b border-gray-900/10 pb-12">
                 <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                    <div class="sm:col-span-3">
+                    <div class="col-span-full">
                         <label for="title" class="block text-sm/6 font-medium text-gray-900">Title</label>
                         <div class="mt-2">
-                            <input id="title" type="text" name="title" value="{{ old('title',$post->title) }}"
+                            <input id="title" type="text" name="title" value="{{ old('title', $post->title) }}"
                                 autocomplete="given-name"
                                 class="{{ $errors->has('title') ? 'outline-red-500' : 'outline-gray-300' }} block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
                         </div>
@@ -20,7 +20,7 @@
                         @enderror
                     </div>
 
-                    <div class="sm:col-span-3">
+                    {{-- <div class="sm:col-span-3">
                         <label for="author" class="block text-sm/6 font-medium text-gray-900">Author</label>
                         <div class="mt-2">
                             <input id="author" type="text" name="author" value="{{ old('author',$post->author) }}"
@@ -30,14 +30,14 @@
                         @error('author')
                             <div class="text-red-500">{{ $message }}</div>
                         @enderror
-                    </div>
+                    </div> --}}
 
                     <div class="col-span-full">
                         <label for="body" class="block text-sm/6 font-medium text-gray-900">Content</label>
                         <div class="mt-2">
                             <textarea id="body" name="body" rows="3"
                                 class="{{ $errors->has('body') ? 'outline-red-500' : 'outline-gray-300' }} block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
-                                {{ old('body',$post->body) }}
+                                {{ old('body', $post->body) }}
                             </textarea>
                         </div>
                         <p class="mt-3 text-sm/6 text-gray-600">Write a few sentences about the article.</p>
@@ -50,7 +50,8 @@
                         <div class="flex gap-3">
                             <div class="flex h-6 shrink-0 items-center">
                                 <div class="group grid size-4 grid-cols-1">
-                                    <input id="published" type="checkbox" name="published" {{ old('published') || (!old() && $post->published) ? 'checked' : ''}}
+                                    <input id="published" type="checkbox" name="published"
+                                        {{ old('published') || (!old() && $post->published) ? 'checked' : '' }}
                                         aria-describedby="published-description"
                                         class="col-start-1 row-start-1 appearance-none rounded-sm border border-gray-300 bg-white checked:border-indigo-600 checked:bg-indigo-600 indeterminate:border-indigo-600 indeterminate:bg-indigo-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto" />
                                     <svg viewBox="0 0 14 14" fill="none"
